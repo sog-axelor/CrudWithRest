@@ -36,6 +36,19 @@ public class EmployeeImpl implements EmpService{
 		em.getTransaction().commit();
 		System.out.println("Your id is :" + id );
 	}
+
+	@Override
+	public void updateEmp(int id,String fname, String lname, String city) {
+		em.getTransaction().begin();
+		em = emp.get();
+		EmpDetail ed = em.find(EmpDetail.class, id);
+		ed.setFname(fname);
+		ed.setCity(city);
+		ed.setLname(lname);
+		em.getTransaction().commit();
+		
+	}
+	
 	
 
 }

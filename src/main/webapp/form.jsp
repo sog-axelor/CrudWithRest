@@ -38,7 +38,8 @@
 	     Statement st = c.createStatement();
 	     ResultSet rs = st.executeQuery("select * from empdetail");
 	     while(rs.next()){
-	  	int id = rs.getInt("id");
+	  	
+	    	 int id = rs.getInt("id");
 		%>		
 		<tr>
 		<td><%= rs.getInt("id") %></td>		
@@ -46,7 +47,9 @@
 		<td><%= rs.getString("lname") %></td>	
 		<td><%= rs.getString("city") %></td>
 		
-		<td><a href=emp/delete/<%= id %>>Delete</a></td>		
+		<td><a href=emp/delete/<%= id %>>Delete</a> &nbsp;
+		<a href=update.jsp?id=<%= id %>>Update</a>	
+		</td>		
 		</tr>
 		<%
 		}
