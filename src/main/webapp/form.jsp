@@ -28,28 +28,30 @@
 		<th>First Name</th>
 		<th>Last Name</th>
 		<th>City</th>
+		<th>Operation</th>
 		</thead>
 		<tbody>
 		
 		<%
 		Class.forName("org.postgresql.Driver");
-	     Connection c = DriverManager.getConnection("jdbc:postgresql://localhost:5432/demo","axelor", "axelor");
-	     System.out.println("Successfully Connected.");
-	     
+	     Connection c = DriverManager.getConnection("jdbc:postgresql://localhost:5432/demo","axelor", "axelor");	     
 	     Statement st = c.createStatement();
 	     ResultSet rs = st.executeQuery("select * from empdetail");
 	     while(rs.next()){
+	  	int id = rs.getInt("id");
 		%>		
 		<tr>
 		<td><%= rs.getInt("id") %></td>		
 		<td><%= rs.getString("fname") %></td>	
 		<td><%= rs.getString("lname") %></td>	
-		<td><%= rs.getString("city") %></td>		
+		<td><%= rs.getString("city") %></td>
+		
+		<td><a href=emp/delete/<%= id %>>Delete</a></td>		
 		</tr>
 		<%
 		}
 		%>
-		</tbody>
+		<tbody>
 		</table>
 </body>
 </html>
