@@ -30,7 +30,6 @@ public class EmpResources{
 	@Path("/create")
 	@Produces(MediaType.APPLICATION_JSON)
 	public Response createUser(@FormParam("fname") String fname,@FormParam("lname") String lname,@FormParam("city") String city) {
-
 		es.addEmp(fname, lname, city);		
 		return Response.status(200).entity("Added SuccessFullly!!!").build();
 		

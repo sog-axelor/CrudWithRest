@@ -1,5 +1,11 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+    
+<%@page import="java.sql.DriverManager"%>
+<%@page import="java.sql.ResultSet"%>
+<%@page import="java.sql.Statement"%>
+<%@page import="java.sql.Connection"%>
+
 <!DOCTYPE html>
 <html>
 <head>
@@ -14,5 +20,36 @@
 		City name : <input type="text" name="city" placeholder="Enter City name "> &nbsp;
 		<input type="submit" name="submit">
 		</form>
+		
+		<h1>Employee Detail </h1>
+		<table border="1" align="center">
+		<thead>
+		<th>Id</th>
+		<th>First Name</th>
+		<th>Last Name</th>
+		<th>City</th>
+		</thead>
+		<tbody>
+		
+		<%
+		Class.forName("org.postgresql.Driver");
+	     Connection c = DriverManager.getConnection("jdbc:postgresql://localhost:5432/demo","axelor", "axelor");
+	     System.out.println("Successfully Connected.");
+	     
+	     Statement st = c.createStatement();
+	     ResultSet rs = st.executeQuery("select * from empdetail");
+	     while(rs.next()){
+		%>		
+		<tr>
+		<td><%= rs.getInt("id") %></td>		
+		<td><%= rs.getString("fname") %></td>	
+		<td><%= rs.getString("lname") %></td>	
+		<td><%= rs.getString("city") %></td>		
+		</tr>
+		<%
+		}
+		%>
+		</tbody>
+		</table>
 </body>
 </html>
