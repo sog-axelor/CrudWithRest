@@ -8,7 +8,7 @@
 </head>
 <body align="center">
 <h1>Employee Register Form</h1>
-		<form action="" method = "post">
+		<form action="emp/create" method = "post">
 		First Name : <input type="text" name="fname" placeholder="Enter First name "> &nbsp;
 		Last  Name : <input type="text" name="lname" placeholder="Enter Last name "> &nbsp;
 		City name : <input type="text" name="city" placeholder="Enter City name "> &nbsp;

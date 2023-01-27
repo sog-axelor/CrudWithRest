@@ -10,17 +10,22 @@ import com.unique.service.EmpService;
 
 public class EmployeeImpl implements EmpService{
 	
+
 	@Inject
-	private Provider<EntityManager> em;
+	Provider<EntityManager> emp;
 	
 	@Transactional
 	@Override
 	public void addEmp(String fname, String lname, String city) {
-		EmpDetail ed = new EmpDetail(fname,lname,city);
-		em.get().persist(ed);
-		System.out.println("Your first name is : " + fname);
-		System.out.println("Your Last name is : " + lname);
-		System.out.println("Your City name is : " + city);
+		
+		EmpDetail ed = new EmpDetail();
+		ed.setFname(fname);
+		ed.setLname(lname);
+		ed.setCity(city);
+		emp.get().persist(ed);
+		System.out.println("Your first name is : " + ed.getFname());
+		System.out.println("Your Last name is : " + ed.getLname());
+		System.out.println("Your City name is : " + ed.getCity());
 		
 	}
 
