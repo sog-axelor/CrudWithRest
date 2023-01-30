@@ -1,6 +1,13 @@
 package com.unique.impl;
 
+import java.util.List;
+
 import javax.persistence.EntityManager;
+import org.hibernate.query.Query;
+import javax.ws.rs.NotFoundException;
+
+import org.hibernate.Session;
+import org.hibernate.SessionFactory;
 
 import com.google.inject.Inject;
 import com.google.inject.Provider;
@@ -8,8 +15,9 @@ import com.google.inject.persist.Transactional;
 import com.unique.db.EmpDetail;
 import com.unique.service.EmpService;
 
+
 public class EmployeeImpl implements EmpService{
-	
+	  
 	@Inject
 	private EntityManager em;
 	
@@ -19,10 +27,8 @@ public class EmployeeImpl implements EmpService{
 	@Transactional
 	@Override
 	public void addEmp(String fname, String lname, String city) {
-			em.getTransaction().begin();
 			EmpDetail ed = new EmpDetail(fname,lname,city);
 			emp.get().persist(ed);
-			em.getTransaction().commit();
 				System.out.println("Your first name is : " + ed.getFname());
 				System.out.println("Your Last name is : " + ed.getLname());
 				System.out.println("Your City name is : " + ed.getCity());	
@@ -48,7 +54,24 @@ public class EmployeeImpl implements EmpService{
 		em.getTransaction().commit();
 		
 	}
-	
-	
 
+
+
+	@Override
+	public void DisplayEmp(int id) {
+		em.getTransaction().begin();
+		EmpDetail ed = em.find(EmpDetail.class, id);	
+		ed.getFname();
+		ed.getLname();
+		ed.getCity();
+		ed.getId();
+		em.getTransaction().commit();
+		
+	}
+
+	@Override
+	public void Emp(int id, String fname, String lname, String city) {
+		em.getTransaction().begin();
+		emp.get().find(EmpDetail.class,id);
+	}
 }

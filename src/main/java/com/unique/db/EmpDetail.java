@@ -23,7 +23,6 @@ public class EmpDetail{
 		this.lname = lname;
 		this.city = city;
 	}
-
 	public int getId() {
 		return id;
 	}
