@@ -3,6 +3,7 @@ package com.unique.resources;
 import java.util.List;
 
 import javax.persistence.EntityManager;
+
 import javax.ws.rs.DELETE;
 import javax.ws.rs.FormParam;
 import javax.ws.rs.GET;
@@ -13,6 +14,8 @@ import javax.ws.rs.PathParam;
 import javax.ws.rs.Produces;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
+
+import org.jboss.resteasy.plugins.providers.html.View;
 
 import com.google.inject.Inject;
 import com.unique.db.EmpDetail;
@@ -34,17 +37,24 @@ public class EmpResources {
 		return Response.ok("Hello World").build();
 	}
 
-	@GET
+//	@GET				//get all value
+//	@Path("/list")
+//	@Produces(MediaType.APPLICATION_JSON)
+//	public Response GetValue() {
+//		  List<EmpDetail> list = es.getAllPersons();
+//       return Response.ok(list).build();
+//	}
+	
+	@GET		//return view page
 	@Path("/list")
-	@Produces(MediaType.APPLICATION_JSON)
-	public Response GetValue() {
+//	@Produces(MediaType.APPLICATION_JSON)
+	public View GetValue() {
 		  List<EmpDetail> list = es.getAllPersons();
-       return Response.ok(list).build();
-	}
+       return new View("/display.jsp",list,"EmpList");
+	}			
 	
 	
-	
-	@GET 
+	@GET 					
 	@Path("/list/{id}")
 	@Produces(MediaType.APPLICATION_JSON)
 	public Response GetEmpbyid(@PathParam("id") Integer id) {
@@ -60,9 +70,11 @@ public class EmpResources {
 			@FormParam("city") String city) {
 		es.addEmp(fname, lname, city);
 		return Response.status(200).entity("Added SuccessFullly!!!").build();
-
 	}
 
+
+	
+	
 	@Path("/delete/{id}")	@Produces(MediaType.APPLICATION_JSON)
 
 	@DELETE
