@@ -8,6 +8,6 @@ public interface EmpService {
 	void addEmp(String fname, String lname,String city);
 	void updateEmp(int id,String fname, String lname,String city);
 	void deleteEmp(int id);
-	void DisplayEmp(int id);
-	void Emp(int id,String fname, String lname,String city);
+	List<EmpDetail> getAllPersons();
+	public EmpDetail getEmpbyid(int id);
 }

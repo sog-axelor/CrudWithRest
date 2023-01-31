@@ -1,5 +1,7 @@
 package com.unique.resources;
 
+import java.util.List;
+
 import javax.persistence.EntityManager;
 import javax.ws.rs.DELETE;
 import javax.ws.rs.FormParam;
@@ -32,14 +34,22 @@ public class EmpResources {
 		return Response.ok("Hello World").build();
 	}
 
-	@GET // simple id return
-	@Path("/{id}")
+	@GET
+	@Path("/list")
 	@Produces(MediaType.APPLICATION_JSON)
-	public Response GetValue(@PathParam("id") Integer id) {
-		
-		EmpDetail ed= new EmpDetail();
-		es.Emp(id,ed.getFname(),ed.getLname(),ed.getCity());
-       return Response.ok(ed).build();
+	public Response GetValue() {
+		  List<EmpDetail> list = es.getAllPersons();
+       return Response.ok(list).build();
+	}
+	
+	
+	
+	@GET 
+	@Path("/list/{id}")
+	@Produces(MediaType.APPLICATION_JSON)
+	public Response GetEmpbyid(@PathParam("id") Integer id) {
+		EmpDetail ed = es.getEmpbyid(id);
+		return Response.ok(ed).build();
 	}
 	
 
@@ -53,9 +63,9 @@ public class EmpResources {
 
 	}
 
-	@Path("/delete/{id}")
+	@Path("/delete/{id}")	@Produces(MediaType.APPLICATION_JSON)
+
 	@DELETE
-	@Produces(MediaType.APPLICATION_JSON)
 	public Response deleteUser(@PathParam("id") Integer id) {
 		es.deleteEmp(id);
 		return Response.status(200).entity("Deleted SuccessFullly!!!").build();

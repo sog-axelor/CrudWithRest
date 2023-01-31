@@ -54,24 +54,24 @@ public class EmployeeImpl implements EmpService{
 		em.getTransaction().commit();
 		
 	}
+	
 
-
-
+	@Transactional
 	@Override
-	public void DisplayEmp(int id) {
-		em.getTransaction().begin();
-		EmpDetail ed = em.find(EmpDetail.class, id);	
-		ed.getFname();
-		ed.getLname();
-		ed.getCity();
-		ed.getId();
-		em.getTransaction().commit();
+	public List<EmpDetail> getAllPersons() {
 		
+		em = emp.get();
+		List<EmpDetail> personList = em.createQuery("from EmpDetail", EmpDetail.class).getResultList();
+		return personList;
 	}
 
 	@Override
-	public void Emp(int id, String fname, String lname, String city) {
-		em.getTransaction().begin();
-		emp.get().find(EmpDetail.class,id);
+	public EmpDetail getEmpbyid(int id) {
+		em = emp.get();
+		EmpDetail e = em.find(EmpDetail.class, id);
+		return e;
 	}
+
+
+
 }
