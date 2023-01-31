@@ -16,36 +16,15 @@
 <h1 align="center">Our Employee</h1>
 
 
-<%--  	<table align="center">
-	<thead>	
-	<tr>
-	<th>Id</th>
-	<th>First Name</th>
-	<th>Last Name</th>
-	<th>City</th>
-	</tr>
-	</thead>
-	<tbody>
 
-	<c:forEach items="${EmpList}" var="emp">
-	<tr>
-	<td><c:out value = "${emp.id}"/></td>
-	<td><c:out value = "${emp.fname}"/></td>
-	<td><c:out value = "${emp.lname}"/></td>
-	<td><c:out value = "${emp.city}"/></td>
-
-	</tr>
-	</c:forEach>
-	</tbody>
-	</table>
-	 --%>
 	
  	<table border=2 align="center">
         <tr>
             <th>ID</th>
-            <th>Name</th>
-            <th>Email</th>
-            <th>Action</th>
+            <th>First Name</th>
+            <th>Last Name</th>
+            <th>City</th>
+            <th>Operation</th>
         </tr>
         <% for (EmpDetail EmpDetail :(List<EmpDetail>)request.getAttribute("EmpList")) { %>
         <tr width="42" height="42">
@@ -53,6 +32,9 @@
             <td><%= EmpDetail.getFname() %></td>
             <td><%= EmpDetail.getLname() %></td>
           	<td><%= EmpDetail.getCity() %></td>
+          	<td><a href="delete/<%= EmpDetail.getId() %>">Delete</a>
+          		<a href="<%= request.getContextPath()%>/emp/update/<%=EmpDetail.getId()%>">Edit</a>
+          	</td>	
         </tr>
         <% } %>
     </table>

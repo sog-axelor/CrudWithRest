@@ -1,3 +1,5 @@
+<%@page import="java.util.List"%>
+<%@page import="com.unique.db.EmpDetail"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
     <%@page import="java.sql.DriverManager"%>
@@ -13,23 +15,14 @@
 <body align="center">
 
 <h1>Employee Register Form</h1>
-<%
-		String id = request.getParameter("id");
 		
-		Class.forName("org.postgresql.Driver");
-	     Connection c = DriverManager.getConnection("jdbc:postgresql://localhost:5432/demo","axelor", "axelor");	     
-	     Statement st = c.createStatement();
-	     ResultSet rs = st.executeQuery("select * from empdetail where id = '"+id+"'");
-	     while(rs.next()){
-		%>	
-		<form action="emp/update/<%= rs.getInt("id") %>" method = "post">
-		First Name : <input type="text" name="fname" value="<%= rs.getString("fname") %>"> &nbsp;
-		Last  Name : <input type="text" name="lname" value="<%= rs.getString("lname") %>" > &nbsp;
-		City name : <input type="text" name="city"  value="<%= rs.getString("city") %>"> &nbsp;
+	  <% EmpDetail e = (EmpDetail) request.getAttribute("EmpById");  %>
+
+       <form action="<%= request.getContextPath()%>/emp/edit/<%= e.getId()  %>" method = "post">
+		First Name : <input type="text" name="fname" value="<%= e.getFname()  %>"> &nbsp;
+		Last  Name : <input type="text" name="lname" value="<%= e.getLname() %>" > &nbsp;
+		City name : <input type="text" name="city"  value="<%=  e.getCity() %>"> &nbsp;
 		<input type="submit" name="submit" value="update">
-		</form>
-		<%
-		}
-		%>
+		</form> 	
 </body>
 </html>
