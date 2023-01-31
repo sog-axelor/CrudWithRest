@@ -21,7 +21,7 @@
 		<input type="submit" name="submit">
 		</form>
 		
-		<h1>Employee Detail </h1>
+		<a href="emp/list"><h1>Employee Detail </h1></a>
 		<table border="1" align="center">
 		<thead>
 		<th>Id</th>
